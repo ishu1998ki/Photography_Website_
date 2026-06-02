@@ -192,3 +192,18 @@ export function filterMedia(category: string): MediaItem[] {
     if (!category || category === "all") return MEDIA_ITEMS;
     return MEDIA_ITEMS.filter((item) => item.category === category);
 }
+
+// ─── Helper: get single item by projectId ─────────────────────────────────────
+export function getMediaByProjectId(projectId: string): MediaItem | undefined {
+    return MEDIA_ITEMS.find((item) => item.projectId === projectId);
+}
+
+// ─── Helper: get related items (same category, excluding current) ─────────────
+export function getRelatedMedia(
+    currentId: string,
+    category: CategoryValue
+): MediaItem[] {
+    return MEDIA_ITEMS.filter(
+        (item) => item.category === category && item.id !== currentId
+    ).slice(0, 6);
+}

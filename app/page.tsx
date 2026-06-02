@@ -1,9 +1,13 @@
-export default function HomePage() {
-  return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <p className="text-brand-muted text-sm tracking-widest uppercase">
-          Gallery coming in Step 3
-        </p>
-      </div>
-  );
+import GalleryGrid from "@/components/GalleryGrid";
+
+interface HomePageProps {
+    searchParams: Promise<{ category?: string }>;
+}
+
+export default async function HomePage({ searchParams }: HomePageProps) {
+    // Next.js 15+ requires awaiting searchParams
+    const { category } = await searchParams;
+    const activeCategory = category ?? "all";
+
+    return <GalleryGrid category={activeCategory} />;
 }
